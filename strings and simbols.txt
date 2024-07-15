@@ -8,6 +8,7 @@ s = 'aaaabbсaa' преобразуется в 'a4b2с1a2', то есть гру
 
 ## Решение задачи
 
+```python
 # put your python code here
 
 string = input()
@@ -29,3 +30,4 @@ for letter in string:
 # запишем, сколько раз в строку входил самый последний элемент (иначе мы его не учтем, т.к. цикл for заканчивется и мы ни в if, ни в else не попадем) 
 answer += symbol + str(symbol_count)
 print(answer)
+```
