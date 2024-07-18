@@ -43,6 +43,7 @@ else:
 
 
 Решение задачи 3:
+(1 способ)
 
 list = input().split()
 new_list=[]
@@ -55,3 +56,14 @@ for i in new_list:
         res.append(i)
 res.sort()
 print(*res)
+
+(2 способ - оптимальный)
+
+list = [int(i) for i in input().split()]
+list.sort()
+
+i = 0
+while i < (len(list)):
+    if list.count(list[i]) > 1:
+        print(list[i], end = ' ')
+    i += list.count(list[i])
