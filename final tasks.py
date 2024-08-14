@@ -59,3 +59,67 @@ if x in lst:
             print(i, end=' ')
 else:
     print('Отсутствует')
+
+# Задача 4
+# Напишите программу, на вход которой подаётся прямоугольная матрица в виде последовательности строк.
+# После последней строки матрицы идёт строка, содержащая только строку "end" (без кавычек, см. Sample Input).
+# Программа должна вывести матрицу того же размера, у которой каждый элемент в позиции i, j равен сумме элементов
+# первой матрицы на позициях (i-1, j), (i+1, j), (i, j-1), (i, j+1). У крайних символов соседний элемент находится
+# с противоположной стороны матрицы.
+# В случае одной строки/столбца элемент сам себе является соседом по соответствующему направлению.
+
+# (решение 1)
+
+matr = []
+
+x = input()
+
+while x != 'end':
+    x = x.split()
+    x = [int(i) for i in x]
+    matr.append(x)
+    x = input()
+
+new_matr =  [[0 for j in range(len(matr[i]))] for i in range(len(matr))]
+
+for i in range(len(matr)):
+    for j in range(len(matr[i])):
+        new_matr[i][j] = matr[i-1][j] + matr[(i+1) % len(matr)][j] + matr[i][j-1] + matr[i][(j+1) % len(matr[i])]
+
+for i in new_matr:
+    print(*i)
+
+# (решение 2)
+
+matr = []
+
+x = input()
+
+while x != 'end':
+    x = x.split()
+    x = [int(i) for i in x]
+    matr.append(x)
+    x = input()
+
+new_matr = []
+for i in range(len(matr)):
+    new_matr_row = []
+    for j in range(len(matr[i])):
+        new_matr_row.append(
+            matr[i - 1][j] + matr[(i + 1) % len(matr)][j] + matr[i][j - 1] + matr[i][(j + 1) % len(matr[i])])
+    new_matr.append(new_matr_row)
+
+for i in new_matr:
+    print(*i)
+
+# (решение 3)
+
+matr = [[int(i) for i in input().split()]]
+x = input()
+while x != 'end' :
+    matr.append([int(i) for i in x.split()])
+    x = input()
+for i in range(len(matr)):
+    for j in range(len(matr[i])):
+        print((matr[i-1][j] + matr[(i+1) % len(matr)][j] + matr[i][j-1] + matr[i][(j+1) % len(matr[i])]), end=' ')
+    print()
