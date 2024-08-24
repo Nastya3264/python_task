@@ -76,3 +76,42 @@ def task_2():
         most_popular = (word_with_max_quantity + ' ' + str(max_quantity))
         file.write(most_popular)
 
+# Задача 3
+# Имеется файл с данными по успеваемости абитуриентов.
+# Он представляет из себя набор строк, где в каждой строке записана следующая информация:
+# Фамилия;Оценка_по_математике;Оценка_по_физике;Оценка_по_русскому_языку
+# Поля внутри строки разделены точкой с запятой, оценки — целые числа.
+# Напишите программу, которая считывает исходный файл с подобной структурой и для каждого абитуриента
+# записывает его среднюю оценку по трём предметам на отдельной строке,
+# соответствующей этому абитуриенту, в файл с ответом. Также вычислите средние баллы по математике,
+# физике и русскому языку по всем абитуриентам и добавьте полученные значения, разделённые пробелом,
+# последней строкой в файл с ответом. В качестве ответа на задание прикрепите полученный файл со средними оценками
+# по каждому ученику и одной строкой со средними оценками по трём предметам.
+
+def task_3():
+    average_sc_lst = []
+    sum_score_math = 0
+    sum_score_rus = 0
+    sum_score_physics = 0
+    n = 0
+
+    with open("dataset_3363_4.txt", "r", encoding='utf-8') as in_f:
+        for line in in_f:
+            name, *scores = line.strip().split(';')  # name - строка, scores - список из чисел (* - переменное число переменных)
+            scores = [int(score) for score in scores]
+            average_sc_lst.append(sum(scores) / len(scores))
+            sum_score_math += scores[0]
+            sum_score_rus += scores[1]
+            sum_score_physics += scores[2]
+            n += 1
+    average_math = sum_score_math / n
+    average_rus = sum_score_rus / n
+    average_physics = sum_score_physics / n
+
+    with open('dataset_3363_4_output.txt', 'w') as out_f:
+        for score in average_sc_lst:
+            out_f.write(str(score) + '\n') # запишем каждый элемент списка в отдельной строке
+        out_f.write(f"{average_math} {average_rus} {average_physics}")
+        # f-string - форматированная строка (подставляет переменные в строку с помощью фигурных скобок)
+
+task_3()
